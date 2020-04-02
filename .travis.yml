@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t chranveer/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true chranveer/react-test npm test
+
+after_success:
+  - docker build -t chranveer/multi-client ./client
+  - docker build -t chranveer/multi-nginx ./nginx
+  - docker build -t chranveer/multi-server ./server
+  - docker build -t chranveer/multi-worker ./worker
+  # Login to Docker CLI
+  -echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --pasword-stdin
+
+  # Take the images and push to dockerhub 
+  - docker push chranveer/multi-client
+  - docker push chranveer/multi-nginx
+  - docker push chranveer/multi-server
+  - docker push chranveer/multi-worker
