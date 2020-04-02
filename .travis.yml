@@ -13,10 +13,9 @@ after_success:
   - docker build -t chranveer/multi-nginx ./nginx
   - docker build -t chranveer/multi-server ./server
   - docker build -t chranveer/multi-worker ./worker
-  # Login to Docker CLI
-  -echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --pasword-stdin
 
-  # Take the images and push to dockerhub 
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --pasword-stdin
+  # Take the images and push to dockerhub
   - docker push chranveer/multi-client
   - docker push chranveer/multi-nginx
   - docker push chranveer/multi-server
