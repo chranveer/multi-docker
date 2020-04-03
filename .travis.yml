@@ -22,13 +22,13 @@ after_success:
   - docker push chranveer/multi-worker
 
 deploy:
-  edge: trrue
+  edge: true
   provider: elasticbeanstalk
-  region: ap-south-1
-  app: multi-docker
-  env: MultiDocker-env
-  bucket_name: elasticbeanstalk-ap-south-1-562377326721
-  bucket_path: docker-multi
+  region: "ap-south-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-562377326721"
+  bucket_path: "multi-docker"
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   on:
